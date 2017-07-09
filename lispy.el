@@ -5810,8 +5810,11 @@ Return start of string it is."
   "Test if point is inside a string or a comment."
   (let* ((sp (syntax-ppss))
          (beg (nth 8 sp)))
-    (when (or (eq (char-after beg) ?\")
-              (nth 4 sp))
+    (when t
+      ;; What was the point of this test?
+      ;; When is beg nil but we are not in a string?
+      ;; (or (eq (char-after beg) ?\")
+      ;;     (nth 4 sp))
       beg)))
 
 (defun lispy--buffer-narrowed-p ()
@@ -8708,7 +8711,7 @@ When ARG is non-nil, unquote the current string."
     (define-key map (kbd "<backtab>") 'lispy-dedent-adjust-parens)
     (define-key map (kbd "DEL") 'lispy-delete-backward-or-splice-or-slurp)
     (define-key map (kbd "C-d") 'lispy-delete-or-splice-or-slurp)
-    (define-key map (kbd ":") 'lispy-colon)
+    ;; (define-key map (kbd ":") 'lispy-colon)
     (define-key map (kbd "^") 'lispy-hat)
     (define-key map (kbd "'") 'lispy-tick)
     (define-key map (kbd "`") 'lispy-backtick)
@@ -8783,11 +8786,11 @@ When ARG is non-nil, unquote the current string."
     (define-key map (kbd "}") 'lispy-brackets)
     (define-key map (kbd "\"") 'lispy-quotes)
     ;; insert
-    (define-key map (kbd ":") 'lispy-colon)
-    (define-key map (kbd "^") 'lispy-hat)
-    (define-key map (kbd "'") 'lispy-tick)
-    (define-key map (kbd "`") 'lispy-backtick)
-    (define-key map (kbd "#") 'lispy-hash)
+    ;; (define-key map (kbd ":") 'lispy-colon)
+    ;; (define-key map (kbd "^") 'lispy-hat)
+    ;; (define-key map (kbd "'") 'lispy-tick)
+    ;; (define-key map (kbd "`") 'lispy-backtick)
+    ;; (define-key map (kbd "#") 'lispy-hash)
     (define-key map (kbd "M-j") 'lispy-split)
     (define-key map (kbd "M-J") 'lispy-join)
     (define-key map (kbd "<C-return>") 'lispy-open-line)
@@ -8835,7 +8838,7 @@ THEME is a list of choices: 'special, 'lispy, 'paredit, 'evilcp, 'c-digits."
 (if (member user-mail-address '("ohwoeowho@gmail.com"
                                 "oleh@oremacs.com"))
     (lispy-set-key-theme '(oleh special lispy c-digits))
-  (lispy-set-key-theme '(special lispy c-digits)))
+  (lispy-set-key-theme '(special lispy)))
 
 (provide 'lispy)
 
