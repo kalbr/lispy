@@ -1853,6 +1853,7 @@ When the region is active, toggle a ~ at the start of the region."
 (declare-function cider-repl-return "ext:cider-repl")
 (declare-function slime-repl-return "ext:slime-repl")
 (declare-function sly-mrepl-return "ext:sly-mrepl")
+(declare-function racket-repl-eval-or-newline-and-indent "ext:racket-repl")
 (defun lispy-newline-and-indent-plain ()
   "When in minibuffer, exit it.  Otherwise forward to `newline-and-indent'."
   (interactive)
@@ -1870,6 +1871,11 @@ When the region is active, toggle a ~ at the start of the region."
     (inferior-emacs-lisp-mode
      (setq this-command 'ielm-return)
      (ielm-return))
+    (racket-mode
+     (newline-and-indent))
+    (racket-repl-mode
+     (racket-repl-eval-or-newline-and-indent))
+    ;; What does the following do? Clearly more than the doc string suggests!
     (t
      (if (and (not (lispy--in-string-or-comment-p))
               (if (memq major-mode lispy-clojure-modes)
